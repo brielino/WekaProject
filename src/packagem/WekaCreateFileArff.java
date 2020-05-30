@@ -26,50 +26,49 @@ public class WekaCreateFileArff {
 	}
 
 	
-	public static void createFileCsvTesting(int version,String projectName) throws FileNotFoundException, IOException {
+	public static void createFileCsvTesting(int version,String projectName) throws IOException {
 		String line="";
 		try(BufferedReader filecsv= new BufferedReader(new FileReader(PATH1+PATH0+projectName+".csv"))){
-			FileWriter csvversion=new FileWriter(PATH1+PATH0+projectName+""+version+"Testing.csv");
-			line=filecsv.readLine();
-			csvversion.write(line);
-			csvversion.write("\n");
-			line=filecsv.readLine();
-			while(line!=null) {
-				String[] z= line.split(",");
-				if(Integer.parseInt(z[0])==version) {
-					csvversion.write(line);
-					csvversion.write("\n");
-				}
+			try(FileWriter csvversion=new FileWriter(PATH1+PATH0+projectName+""+version+"Testing.csv")){
 				line=filecsv.readLine();
-				
+				csvversion.write(line);
+				csvversion.write("\n");
+				line=filecsv.readLine();
+				while(line!=null) {
+					String[] z= line.split(",");
+					if(Integer.parseInt(z[0])==version) {
+						csvversion.write(line);
+						csvversion.write("\n");
+					}
+					line=filecsv.readLine();
+					
+				}
+				csvversion.close();
 			}
-			csvversion.close();
 		}
-		
-		
+			
 	}
 	
-	public static void createFileCsvTraining(int version,String projectName) throws FileNotFoundException, IOException {
+	public static void createFileCsvTraining(int version,String projectName) throws IOException {
 		String line="";
 		try(BufferedReader filecsv= new BufferedReader(new FileReader(PATH1+PATH0+projectName+".csv"))){
-			FileWriter csvversion=new FileWriter(PATH1+PATH0+projectName+version+"Training.csv");
-			line=filecsv.readLine();
-			csvversion.write(line);
-			csvversion.write("\n");
-			line=filecsv.readLine();
-			while(line!=null) {
-				String[] z= line.split(",");
-				if(Integer.parseInt(z[0])<version) {
-					csvversion.write(line);
-					csvversion.write("\n");
-				}
+			try(FileWriter csvversion=new FileWriter(PATH1+PATH0+projectName+version+"Training.csv")){
 				line=filecsv.readLine();
-				
-			}
-			csvversion.close();
-		}
-		
-		
+				csvversion.write(line);
+				csvversion.write("\n");
+				line=filecsv.readLine();
+				while(line!=null) {
+					String[] z= line.split(",");
+					if(Integer.parseInt(z[0])<version) {
+						csvversion.write(line);
+						csvversion.write("\n");
+					}
+					line=filecsv.readLine();
+					
+				}
+				csvversion.close();
+			    }
+		}	
 	}
 	
 	public static void createFileArff(int i,String projectName) throws IOException {

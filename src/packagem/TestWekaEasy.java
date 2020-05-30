@@ -23,12 +23,12 @@ public class TestWekaEasy{
 		throw new UnsupportedOperationException();
 	}
 	
-	public static void writeFileCsv(String Classifier,int i,double precision,double recall,double auc,double kappa,FileWriter fileWriter) throws IOException {
+	public static void writeFileCsv(String classifier,int i,double precision,double recall,double auc,double kappa,FileWriter fileWriter) throws IOException {
 		fileWriter.append(PROJECTNAME);
 		fileWriter.append(",");
 		fileWriter.append(Integer.toString(i));
 		fileWriter.append(",");
-		fileWriter.append(Classifier);
+		fileWriter.append(classifier);
 		fileWriter.append(",");
 		fileWriter.append(Double.toString(precision));
 		fileWriter.append(",");
@@ -72,8 +72,6 @@ public class TestWekaEasy{
 					writeFileCsv("IBk",i,eval.precision(1),eval.recall(1),eval.areaUnderROC(1),eval.kappa(),fileWriter);
 				}
 			}
-			fileWriter.close();
-				
 		}
 	}
 }
