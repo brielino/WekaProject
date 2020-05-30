@@ -20,6 +20,7 @@ public class WekaCreateFileArff {
 	public static final String PATH2="\\Users\\gabri\\OneDrive\\Desktop\\Bri\\Magistrale Bri\\Secondo";
 	public static final String PATH3=" Semestre 1\\ISW2\\Falessi\\20200407 Falessi Deliverable 2 Milestone 1 V2\\GetReleaseInfo\\";
 	public static final String INFO="VersionInfo.csv";
+	public static final String PATH4="\\Users\\gabri\\OneDrive\\Desktop\\WekaFiles\\Metriche";
 	
 	private WekaCreateFileArff() {
 		throw new UnsupportedOperationException();
@@ -29,7 +30,7 @@ public class WekaCreateFileArff {
 	public static void createFileCsvTesting(int version,String projectName) throws IOException {
 		String line="";
 		try(BufferedReader filecsv= new BufferedReader(new FileReader(PATH1+PATH0+projectName+".csv"))){
-			try(FileWriter csvversion=new FileWriter(PATH1+PATH0+projectName+""+version+"Testing.csv")){
+			try(FileWriter csvversion=new FileWriter(PATH1+PATH4+projectName+""+version+"Testing.csv")){
 				line=filecsv.readLine();
 				csvversion.write(line);
 				csvversion.write("\n");
@@ -43,7 +44,6 @@ public class WekaCreateFileArff {
 					line=filecsv.readLine();
 					
 				}
-				csvversion.close();
 			}
 		}
 			
@@ -52,7 +52,7 @@ public class WekaCreateFileArff {
 	public static void createFileCsvTraining(int version,String projectName) throws IOException {
 		String line="";
 		try(BufferedReader filecsv= new BufferedReader(new FileReader(PATH1+PATH0+projectName+".csv"))){
-			try(FileWriter csvversion=new FileWriter(PATH1+PATH0+projectName+version+"Training.csv")){
+			try(FileWriter csvversion=new FileWriter(PATH1+PATH4+projectName+version+"Training.csv")){
 				line=filecsv.readLine();
 				csvversion.write(line);
 				csvversion.write("\n");
@@ -66,26 +66,25 @@ public class WekaCreateFileArff {
 					line=filecsv.readLine();
 					
 				}
-				csvversion.close();
-			    }
+			}
 		}	
 	}
 	
 	public static void createFileArff(int i,String projectName) throws IOException {
 		CSVLoader loader1 = new CSVLoader();
-		loader1.setSource(new File(PATH1+PATH0+projectName+i+"Training.csv"));
+		loader1.setSource(new File(PATH1+PATH4+projectName+i+"Training.csv"));
 		Instances data1 = loader1.getDataSet(); 
 		ArffSaver saver1 = new ArffSaver();
 	    saver1.setInstances(data1);
-	    saver1.setFile(new File(PATH1+PATH0+projectName+i+"Training.arff"));
+	    saver1.setFile(new File(PATH1+PATH4+projectName+i+"Training.arff"));
 	    saver1.writeBatch();
 	    
 	    CSVLoader loader2 = new CSVLoader();
-		loader2.setSource(new File(PATH1+PATH0+projectName+i+"Testing.csv"));
+		loader2.setSource(new File(PATH1+PATH4+projectName+i+"Testing.csv"));
 		Instances data2 = loader1.getDataSet();
 		ArffSaver saver2 = new ArffSaver();
 	    saver2.setInstances(data2);
-	    saver2.setFile(new File(PATH1+PATH0+projectName+i+"Testing.arff"));
+	    saver2.setFile(new File(PATH1+"\\Users\\gabri\\OneDrive\\Desktop\\WekaFiles\\Metriche"+projectName+i+"Testing.arff"));
 	    saver2.writeBatch();
 	}
 	
@@ -119,7 +118,7 @@ public class WekaCreateFileArff {
 	
 	public static void main(String[] args) throws Exception {
 	    
-		String projectName ="BOOKKEEPER";
+		String projectName ="TAJO";
 
 		ArrayList<Integer> version=(ArrayList<Integer>) foundVersion(projectName);
 		for(int i = 0;i<version.size();i++) {

@@ -17,7 +17,7 @@ public class TestWekaEasy{
 	
 	public static final String PATH0="\\Users\\gabri\\OneDrive\\Desktop\\Metriche";
 	public static final String PATH1="C:";
-	public static final String PROJECTNAME="BOOKKEEPER";
+	public static final String PROJECTNAME="TAJO";
 	
 	private TestWekaEasy() {
 		throw new UnsupportedOperationException();
@@ -43,7 +43,7 @@ public class TestWekaEasy{
 		
 	}
 	
-	public static void main(String args[]) throws Exception{
+	public static void main(String[] args) throws Exception{
 		//load datasets
 		ArrayList<Integer> version=(ArrayList<Integer>) WekaCreateFileArff.foundVersion(PROJECTNAME);
 		try(FileWriter fileWriter = new FileWriter(PATH1+"\\Users\\gabri\\OneDrive\\Desktop\\"+PROJECTNAME+"WekaInfo.csv")){
