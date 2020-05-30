@@ -1,6 +1,5 @@
 package packagem;
 
-
 import weka.core.Instances;
 
 import java.io.FileWriter;
@@ -12,8 +11,6 @@ import weka.classifiers.trees.RandomForest;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.classifiers.lazy.IBk;
-
-
 
 
 public class TestWekaEasy{
