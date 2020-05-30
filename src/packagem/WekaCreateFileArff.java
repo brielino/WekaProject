@@ -84,7 +84,7 @@ public class WekaCreateFileArff {
 		Instances data2 = loader1.getDataSet();
 		ArffSaver saver2 = new ArffSaver();
 	    saver2.setInstances(data2);
-	    saver2.setFile(new File(PATH1+"\\Users\\gabri\\OneDrive\\Desktop\\WekaFiles\\Metriche"+projectName+i+"Testing.arff"));
+	    saver2.setFile(new File(PATH1+PATH4+projectName+i+"Testing.arff"));
 	    saver2.writeBatch();
 	}
 	
