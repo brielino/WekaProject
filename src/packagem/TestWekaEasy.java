@@ -22,8 +22,8 @@ public class TestWekaEasy{
 	public static final String PATH0="\\Users\\gabri\\OneDrive\\Desktop\\Metriche";
 	public static final String PATH1="C:";
 	public static final String PROJECTNAME="TAJO";
-	public static int numberofAttribute=0;
-	public static Boolean writeFilter=false;
+	static int numberofAttribute=0;
+	static Boolean writeFilter=false;
 	
 	private TestWekaEasy() {
 		throw new UnsupportedOperationException();
