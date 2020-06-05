@@ -308,7 +308,7 @@ public class TestWekaSampling {
 		filewriter.append("\n");		
 	}
 	
-	public static void main(String args[]) throws Exception{
+	public static void main(String[] args) throws Exception{
 		DataSource source1 = new DataSource(PATH1+PATH0+PROJECTNAME+"TrainingSmote.arff");
 		Instances training = source1.getDataSet();
 		DataSource source2 = new DataSource(PATH1+PATH0+PROJECTNAME+"TestingSmote.arff");
@@ -318,10 +318,10 @@ public class TestWekaSampling {
 		testing.setClassIndex(numAttr - 1);
 		try(FileWriter filewriter=new FileWriter(PATH1+PATH0+PROJECTNAME+"InfoSampling.csv")){
 			filewriter.append("DataSet,#TipeSampling,Classifier,Precision,Recall,AUC,Kappa,Correct%\n");
-			RandomForest RandomForest = new RandomForest();
-			RandomForest.buildClassifier(training);
+			RandomForest rf = new RandomForest();
+			rf.buildClassifier(training);
 			Evaluation eval = new Evaluation(testing);	
-			eval.evaluateModel(RandomForest, testing);
+			eval.evaluateModel(rf, testing);
 			writefile(filewriter,eval,NS,RANDOMFOREST);
 			writefile(filewriter,underSamplingRandomForest(training,testing),UNS,RANDOMFOREST);
 			writefile(filewriter,overSamplingRandomForest(training,testing),OVS,RANDOMFOREST);
