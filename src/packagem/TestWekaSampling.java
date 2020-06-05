@@ -93,7 +93,7 @@ public class TestWekaSampling {
 		 * informaazione necessarie per poter implementare OverSampling 
 		 */
 		String line="";
-		int count=0;
+		int count=1;
 		int y=0;
 		int n=0;
 		try(BufferedReader fileTraining =new BufferedReader(new FileReader(PATH1+PATH0+PROJECTNAME+TRAININGSMOTE))){
