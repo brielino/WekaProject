@@ -27,6 +27,15 @@ public class TestWekaSampling {
 	public static final String PATH0="\\Users\\gabri\\OneDrive\\Desktop\\SamplingFiles\\";
 	public static final String PATH1="C:";
 	public static final String PROJECTNAME="TAJO";
+	public static final String TRAININGSMOTE="TrainingSmote.csv";
+	public static final String RANDOMFOREST="RandomForest";
+	public static final String NAIVEBAYES="NaiveBayes";
+	public static final String IBK="IBk";
+	public static final String SMOTE="SMOTE";
+	public static final String NS="NoSampling";
+	public static final String OVS="OverSampling";
+	public static final String UNS="UnderSampling";
+	public static final String[] OPTS ={ "-B", "1.0", "-Z", "130.3"};
 	
 	private TestWekaSampling() {
 		throw new UnsupportedOperationException();
@@ -56,7 +65,7 @@ public class TestWekaSampling {
 		String line="";
 		int count=1;
 		try(BufferedReader filecsv= new BufferedReader(new FileReader(PATH1+PATH+PROJECTNAME+".csv"))){
-			try(FileWriter fileTraining=new FileWriter(PATH1+PATH0+PROJECTNAME+"TrainingSmote.csv");
+			try(FileWriter fileTraining=new FileWriter(PATH1+PATH0+PROJECTNAME+TRAININGSMOTE);
 					FileWriter fileTesting =new FileWriter(PATH1+PATH0+PROJECTNAME+"TestingSmote.csv")){
 				line=filecsv.readLine();
 				fileTraining.write(line);
@@ -87,7 +96,7 @@ public class TestWekaSampling {
 		int count=0;
 		int y=0;
 		int n=0;
-		try(BufferedReader fileTraining =new BufferedReader(new FileReader(PATH1+PATH0+PROJECTNAME+"TrainingSmote.csv"))){
+		try(BufferedReader fileTraining =new BufferedReader(new FileReader(PATH1+PATH0+PROJECTNAME+TRAININGSMOTE))){
 			line=fileTraining.readLine();
 			while(line!=null) {
 				String[] z= line.split(",");
@@ -115,13 +124,12 @@ public class TestWekaSampling {
 		resample.setInputFormat(training);
 		resample.setNoReplacement(false);
 		resample.setSampleSizePercent(2*takeYforOverSampling());
-		String[] opts = new String[]{ "-B", "1.0", "-Z", "130.3"};
-		resample.setOptions(opts);
+		resample.setOptions(OPTS);
 		
 		FilteredClassifier fc = new FilteredClassifier();
 
-		RandomForest RandomForest2 = new RandomForest();
-		fc.setClassifier(RandomForest2);
+		RandomForest rf = new RandomForest();
+		fc.setClassifier(rf);
 		
 		fc.setFilter(resample);
 		fc.buildClassifier(training);
@@ -135,8 +143,7 @@ public class TestWekaSampling {
 		resample.setInputFormat(training);
 		resample.setNoReplacement(false);
 		resample.setSampleSizePercent(2*takeYforOverSampling());
-		String[] opts = new String[]{ "-B", "1.0", "-Z", "130.3"};
-		resample.setOptions(opts);
+		resample.setOptions(OPTS);
 		
 		FilteredClassifier fc = new FilteredClassifier();
 
@@ -155,8 +162,7 @@ public class TestWekaSampling {
 		resample.setInputFormat(training);
 		resample.setNoReplacement(false);
 		resample.setSampleSizePercent(2*takeYforOverSampling());
-		String[] opts = new String[]{ "-B", "1.0", "-Z", "130.3"};
-		resample.setOptions(opts);
+		resample.setOptions(OPTS);
 		
 		FilteredClassifier fc = new FilteredClassifier();
 
@@ -172,8 +178,8 @@ public class TestWekaSampling {
 	
 	public static Evaluation smoteSamplingRandomForest(Instances training,Instances testing) throws Exception {
 		FilteredClassifier fc = new FilteredClassifier();
-		RandomForest RandomForest2 = new RandomForest();
-		fc.setClassifier(RandomForest2);
+		RandomForest rf = new RandomForest();
+		fc.setClassifier(rf);
 		
 		SMOTE smote = new SMOTE();
 		smote.setInputFormat(training);
@@ -217,8 +223,8 @@ public class TestWekaSampling {
 	
 	public static Evaluation underSamplingRandomForest(Instances training,Instances testing) throws Exception {
 		FilteredClassifier fc = new FilteredClassifier();
-		RandomForest RandomForest2 = new RandomForest();
-		fc.setClassifier(RandomForest2);
+		RandomForest rf = new RandomForest();
+		fc.setClassifier(rf);
 		
 		SpreadSubsample  spreadSubsample = new SpreadSubsample();
 		String[] opts = new String[]{ "-M", "1.0"};
@@ -233,8 +239,8 @@ public class TestWekaSampling {
 	
 	public static Evaluation underSamplingNaiveBayes(Instances training,Instances testing) throws Exception {
 		FilteredClassifier fc = new FilteredClassifier();
-		NaiveBayes NaiveB2 = new NaiveBayes();
-		fc.setClassifier(NaiveB2);
+		NaiveBayes nb = new NaiveBayes();
+		fc.setClassifier(nb);
 		
 		SpreadSubsample  spreadSubsample = new SpreadSubsample();
 		String[] opts = new String[]{ "-M", "1.0"};
@@ -266,7 +272,7 @@ public class TestWekaSampling {
 	public static void createFileArff() throws IOException {
 		/* Metodo per la conversione di file Csv in file ARFF */
 		CSVLoader loader1 = new CSVLoader();
-		loader1.setSource(new File(PATH1+PATH0+PROJECTNAME+"TrainingSmote.csv"));
+		loader1.setSource(new File(PATH1+PATH0+PROJECTNAME+TRAININGSMOTE));
 		Instances data1 = loader1.getDataSet(); 
 		ArffSaver saver1 = new ArffSaver();
 	    saver1.setInstances(data1);
@@ -316,27 +322,25 @@ public class TestWekaSampling {
 			RandomForest.buildClassifier(training);
 			Evaluation eval = new Evaluation(testing);	
 			eval.evaluateModel(RandomForest, testing);
-			writefile(filewriter,eval,"NoSampling","RandomForest");
-			writefile(filewriter,underSamplingRandomForest(training,testing),"UnderSampling","RandomForest");
-			writefile(filewriter,overSamplingRandomForest(training,testing),"OverSampling","RandomForest");
-			writefile(filewriter,smoteSamplingRandomForest(training,testing),"SMOTE","RandomForest");
+			writefile(filewriter,eval,NS,RANDOMFOREST);
+			writefile(filewriter,underSamplingRandomForest(training,testing),UNS,RANDOMFOREST);
+			writefile(filewriter,overSamplingRandomForest(training,testing),OVS,RANDOMFOREST);
+			writefile(filewriter,smoteSamplingRandomForest(training,testing),SMOTE,RANDOMFOREST);
 			NaiveBayes naiveB = new NaiveBayes();
 			naiveB.buildClassifier(training);
 			Evaluation eval1 = new Evaluation(testing);	
 			eval1.evaluateModel(naiveB, testing);
-			writefile(filewriter,eval1,"NoSampling","NaiveBayes");
-			writefile(filewriter,underSamplingNaiveBayes(training,testing),"UnderSampling","NaiveBayes");
-			writefile(filewriter,overSamplingNaiveBayes(training,testing),"OverSampling","NaiveBayes");
-			writefile(filewriter,smoteSamplingNaiveBayes(training,testing),"SMOTE","NaiveBayes");
+			writefile(filewriter,eval1,NS,NAIVEBAYES);
+			writefile(filewriter,underSamplingNaiveBayes(training,testing),UNS,NAIVEBAYES);
+			writefile(filewriter,overSamplingNaiveBayes(training,testing),OVS,NAIVEBAYES);
+			writefile(filewriter,smoteSamplingNaiveBayes(training,testing),SMOTE,NAIVEBAYES);
 			IBk ibk = new IBk();
 			ibk.buildClassifier(training);
 			Evaluation eval2 = new Evaluation(testing);
-			writefile(filewriter,eval2,"NoSampling","IBk");
-			writefile(filewriter,underSamplingIBk(training,testing),"UnderSampling","IBk");
-			writefile(filewriter,overSamplingIBk(training,testing),"OverSampling","IBk");
-			writefile(filewriter,smoteSamplingIBk(training,testing),"SMOTE","IBk");
-			
-		}
-				
+			writefile(filewriter,eval2,NS,IBK);
+			writefile(filewriter,underSamplingIBk(training,testing),UNS,IBK);
+			writefile(filewriter,overSamplingIBk(training,testing),OVS,IBK);
+			writefile(filewriter,smoteSamplingIBk(training,testing),SMOTE,IBK);	
+		}			
 	}
 }
