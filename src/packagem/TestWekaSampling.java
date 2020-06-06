@@ -35,7 +35,7 @@ public class TestWekaSampling {
 	public static final String NS="NoSampling";
 	public static final String OVS="OverSampling";
 	public static final String UNS="UnderSampling";
-	public static final String[] OPTS ={ "-B", "1.0", "-Z", "130.3"};
+	protected static final String[]  OPTS={ "-B", "1.0", "-Z", "130.3"};
 	
 	private TestWekaSampling() {
 		throw new UnsupportedOperationException();
