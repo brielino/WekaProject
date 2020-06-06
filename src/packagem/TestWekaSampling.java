@@ -57,6 +57,9 @@ public class TestWekaSampling {
 		return count*66/100;
 	}
 	
+	public static void doNothing() {
+		// Questo metodo è stato introdotto per fare nulla
+	}
 	
 	public static void createFileCsvTraining(int numberSplit) throws IOException {
 		/* Creo 2 file Csv uno per il Testing e un per Training utilizzando numSplit come delimitatore per 
@@ -120,153 +123,191 @@ public class TestWekaSampling {
 	 * applicati a i diversi classificatori 
 	 */
 	public static Evaluation overSamplingRandomForest(Instances training,Instances testing) throws Exception {
-		Resample resample = new Resample();
-		resample.setInputFormat(training);
-		resample.setNoReplacement(false);
-		resample.setSampleSizePercent(2*takeYforOverSampling());
-		resample.setOptions(OPTS);
-		
-		FilteredClassifier fc = new FilteredClassifier();
+		try{
+			Resample resample = new Resample();
+			resample.setInputFormat(training);
+			resample.setNoReplacement(false);
+			resample.setSampleSizePercent(2*takeYforOverSampling());
+			resample.setOptions(OPTS);
+			
+			FilteredClassifier fc = new FilteredClassifier();
 
-		RandomForest rf = new RandomForest();
-		fc.setClassifier(rf);
-		
-		fc.setFilter(resample);
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing);
-		return eval2;
+			RandomForest rf = new RandomForest();
+			fc.setClassifier(rf);
+			
+			fc.setFilter(resample);
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing);
+			return eval2;
+		}finally {
+			//
+		}
 	}
 	
 	public static Evaluation overSamplingNaiveBayes(Instances training,Instances testing) throws Exception {
-		Resample resample = new Resample();
-		resample.setInputFormat(training);
-		resample.setNoReplacement(false);
-		resample.setSampleSizePercent(2*takeYforOverSampling());
-		resample.setOptions(OPTS);
-		
-		FilteredClassifier fc = new FilteredClassifier();
+		try{
+			Resample resample = new Resample();
+			resample.setInputFormat(training);
+			resample.setNoReplacement(false);
+			resample.setSampleSizePercent(2*takeYforOverSampling());
+			resample.setOptions(OPTS);
+			
+			FilteredClassifier fc = new FilteredClassifier();
 
-		NaiveBayes naiveB = new NaiveBayes();
-		fc.setClassifier(naiveB);
-		
-		fc.setFilter(resample);
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing);
-		return eval2;
+			NaiveBayes naiveB = new NaiveBayes();
+			fc.setClassifier(naiveB);
+			
+			fc.setFilter(resample);
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing);
+			return eval2;
+		}finally {
+			doNothing();
+		}
 	}
 	
 	public static Evaluation overSamplingIBk(Instances training,Instances testing) throws Exception {
-		Resample resample = new Resample();
-		resample.setInputFormat(training);
-		resample.setNoReplacement(false);
-		resample.setSampleSizePercent(2*takeYforOverSampling());
-		resample.setOptions(OPTS);
-		
-		FilteredClassifier fc = new FilteredClassifier();
-
-		IBk ibk = new IBk();
-		fc.setClassifier(ibk);
-		
-		fc.setFilter(resample);
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing);
-		return eval2;
+			
+		try{
+			Resample resample = new Resample();
+			resample.setInputFormat(training);
+			resample.setNoReplacement(false);
+			resample.setSampleSizePercent(2*takeYforOverSampling());
+			resample.setOptions(OPTS);
+			
+			FilteredClassifier fc = new FilteredClassifier();
+	
+			IBk ibk = new IBk();
+			fc.setClassifier(ibk);
+			
+			fc.setFilter(resample);
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing);
+			return eval2;
+		}finally {
+			doNothing();
+		}
 	}
 	
 	public static Evaluation smoteSamplingRandomForest(Instances training,Instances testing) throws Exception {
-		FilteredClassifier fc = new FilteredClassifier();
-		RandomForest rf = new RandomForest();
-		fc.setClassifier(rf);
-		
-		SMOTE smote = new SMOTE();
-		smote.setInputFormat(training);
-		fc.setFilter(smote);
-		
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing); //sampled
-		return eval2;
+			
+		try {
+			FilteredClassifier fc = new FilteredClassifier();
+			RandomForest rf = new RandomForest();
+			fc.setClassifier(rf);
+			
+			SMOTE smote = new SMOTE();
+			smote.setInputFormat(training);
+			fc.setFilter(smote);
+			
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing); //sampled
+			return eval2;
+		}finally {
+			doNothing();
+		}
 	}
 	
 	public static Evaluation smoteSamplingNaiveBayes(Instances training,Instances testing) throws Exception {
-		FilteredClassifier fc = new FilteredClassifier();
-		NaiveBayes naiveB = new NaiveBayes();
-		fc.setClassifier(naiveB);
-		
-		SMOTE smote = new SMOTE();
-		smote.setInputFormat(training);
-		fc.setFilter(smote);
-		
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing); //sampled
-		return eval2;
+		try {	
+			FilteredClassifier fc = new FilteredClassifier();
+			NaiveBayes naiveB = new NaiveBayes();
+			fc.setClassifier(naiveB);
+			
+			SMOTE smote = new SMOTE();
+			smote.setInputFormat(training);
+			fc.setFilter(smote);
+			
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing); //sampled
+			return eval2;
+		}finally {
+			doNothing();
+		}
 	}
 	
 	public static Evaluation smoteSamplingIBk(Instances training,Instances testing) throws Exception {
-		FilteredClassifier fc = new FilteredClassifier();
-		IBk ibk = new IBk();
-		fc.setClassifier(ibk);
-		
-		SMOTE smote = new SMOTE();
-		smote.setInputFormat(training);
-		fc.setFilter(smote);
-		
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing); //sampled
-		return eval2;
+		try {
+			FilteredClassifier fc = new FilteredClassifier();
+			IBk ibk = new IBk();
+			fc.setClassifier(ibk);
+			
+			SMOTE smote = new SMOTE();
+			smote.setInputFormat(training);
+			fc.setFilter(smote);
+			
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing); //sampled
+			return eval2;
+		}finally {
+			doNothing();
+		}
 	}
 	
 	public static Evaluation underSamplingRandomForest(Instances training,Instances testing) throws Exception {
-		FilteredClassifier fc = new FilteredClassifier();
-		RandomForest rf = new RandomForest();
-		fc.setClassifier(rf);
-		
-		SpreadSubsample  spreadSubsample = new SpreadSubsample();
-		String[] opts = new String[]{ "-M", "1.0"};
-		spreadSubsample.setOptions(opts);
-		fc.setFilter(spreadSubsample);
-		
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing); //sampled
-		return eval2;
+		try {	
+			FilteredClassifier fc = new FilteredClassifier();
+			RandomForest rf = new RandomForest();
+			fc.setClassifier(rf);
+			
+			SpreadSubsample  spreadSubsample = new SpreadSubsample();
+			String[] opts = new String[]{ "-M", "1.0"};
+			spreadSubsample.setOptions(opts);
+			fc.setFilter(spreadSubsample);
+			
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing); //sampled
+			return eval2;
+		}finally {
+			doNothing();
+		}
 	}
 	
 	public static Evaluation underSamplingNaiveBayes(Instances training,Instances testing) throws Exception {
-		FilteredClassifier fc = new FilteredClassifier();
-		NaiveBayes nb = new NaiveBayes();
-		fc.setClassifier(nb);
-		
-		SpreadSubsample  spreadSubsample = new SpreadSubsample();
-		String[] opts = new String[]{ "-M", "1.0"};
-		spreadSubsample.setOptions(opts);
-		fc.setFilter(spreadSubsample);
-		
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing); //sampled
-		return eval2;
+		try {	
+			FilteredClassifier fc = new FilteredClassifier();
+			NaiveBayes nb = new NaiveBayes();
+			fc.setClassifier(nb);
+			
+			SpreadSubsample  spreadSubsample = new SpreadSubsample();
+			String[] opts = new String[]{ "-M", "1.0"};
+			spreadSubsample.setOptions(opts);
+			fc.setFilter(spreadSubsample);
+			
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing); //sampled
+			return eval2;
+		}finally {
+			doNothing();
+		}
 	}
 	
 	public static Evaluation underSamplingIBk(Instances training,Instances testing) throws Exception {
-		FilteredClassifier fc = new FilteredClassifier();
-		IBk ibk = new IBk();
-		fc.setClassifier(ibk);
-		
-		SpreadSubsample  spreadSubsample = new SpreadSubsample();
-		String[] opts = new String[]{ "-M", "1.0"};
-		spreadSubsample.setOptions(opts);
-		fc.setFilter(spreadSubsample);
-		
-		fc.buildClassifier(training);
-		Evaluation eval2 = new Evaluation(testing);	
-		eval2.evaluateModel(fc, testing); //sampled
-		return eval2;
+		try {	
+			FilteredClassifier fc = new FilteredClassifier();
+			IBk ibk = new IBk();
+			fc.setClassifier(ibk);
+			
+			SpreadSubsample  spreadSubsample = new SpreadSubsample();
+			String[] opts = new String[]{ "-M", "1.0"};
+			spreadSubsample.setOptions(opts);
+			fc.setFilter(spreadSubsample);
+			
+			fc.buildClassifier(training);
+			Evaluation eval2 = new Evaluation(testing);	
+			eval2.evaluateModel(fc, testing); //sampled
+			return eval2;
+		}finally {
+			doNothing();
+		}
 	}
 	
 	public static void createFileArff() throws IOException {
