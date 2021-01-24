@@ -6,6 +6,7 @@ addons:
  sonarcloud:
   organization: brielino
   token: cd90e43995091c5821a442b850ac55b235f19f11
+  
 script:
 - ant build
 - sonar-scanner
