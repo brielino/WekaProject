@@ -122,199 +122,199 @@ public class TestWekaSampling {
 	/* Insieme di metodi che implementano le diverse tipologie di Sampling (SMOTE,OverSampling,UnderSampling) 
 	 * applicati a i diversi classificatori 
 	 */
-	public static Evaluation overSamplingRandomForest(Instances training,Instances testing){
+	public static Evaluation overSamplingRandomForest(Instances trainingORF,Instances testingORF){
 		try{
 			Resample resample = new Resample();
 			
-			resample.setInputFormat(training);
+			resample.setInputFormat(trainingORF);
 			
 			resample.setNoReplacement(false);
 			resample.setSampleSizePercent(2*takeYforOverSampling());
 			resample.setOptions(OPTS);
 			
-			FilteredClassifier fc = new FilteredClassifier();
+			FilteredClassifier fcORF = new FilteredClassifier();
 
 			RandomForest rf = new RandomForest();
-			fc.setClassifier(rf);
+			fcORF.setClassifier(rf);
 			
-			fc.setFilter(resample);
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing);
-			return eval2;
+			fcORF.setFilter(resample);
+			fcORF.buildClassifier(trainingORF);
+			Evaluation evalORF = new Evaluation(testingORF);	
+			evalORF.evaluateModel(fcORF, testingORF);
+			return evalORF;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Evaluation overSamplingNaiveBayes(Instances training,Instances testing){
+	public static Evaluation overSamplingNaiveBayes(Instances treaningONB,Instances testingONB){
 		try{
 			Resample resample = new Resample();
-			resample.setInputFormat(training);
+			resample.setInputFormat(treaningONB);
 			resample.setNoReplacement(false);
 			resample.setSampleSizePercent(2*takeYforOverSampling());
 			resample.setOptions(OPTS);
 			
-			FilteredClassifier fc = new FilteredClassifier();
+			FilteredClassifier fcONB = new FilteredClassifier();
 
 			NaiveBayes naiveB = new NaiveBayes();
-			fc.setClassifier(naiveB);
+			fcONB.setClassifier(naiveB);
 			
-			fc.setFilter(resample);
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing);
-			return eval2;
+			fcONB.setFilter(resample);
+			fcONB.buildClassifier(treaningONB);
+			Evaluation evalONB = new Evaluation(testingONB);	
+			evalONB.evaluateModel(fcONB, testingONB);
+			return evalONB;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Evaluation overSamplingIBk(Instances training,Instances testing){
+	public static Evaluation overSamplingIBk(Instances trainingOIBK,Instances testingOIBK){
 			
 		try{
 			Resample resample = new Resample();
-			resample.setInputFormat(training);
+			resample.setInputFormat(trainingOIBK);
 			resample.setNoReplacement(false);
 			resample.setSampleSizePercent(2*takeYforOverSampling());
 			resample.setOptions(OPTS);
 			
-			FilteredClassifier fc = new FilteredClassifier();
+			FilteredClassifier fcOIBK = new FilteredClassifier();
 	
 			IBk ibk = new IBk();
-			fc.setClassifier(ibk);
+			fcOIBK.setClassifier(ibk);
 			
-			fc.setFilter(resample);
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing);
-			return eval2;
+			fcOIBK.setFilter(resample);
+			fcOIBK.buildClassifier(trainingOIBK);
+			Evaluation evaOIBK = new Evaluation(testingOIBK);	
+			evaOIBK.evaluateModel(fcOIBK, testingOIBK);
+			return evaOIBK;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Evaluation smoteSamplingRandomForest(Instances training,Instances testing){
+	public static Evaluation smoteSamplingRandomForest(Instances trainingSRF,Instances testingSFR){
 			
 		try {
-			FilteredClassifier fc = new FilteredClassifier();
-			RandomForest rf = new RandomForest();
-			fc.setClassifier(rf);
+			FilteredClassifier fcSRF = new FilteredClassifier();
+			RandomForest rfSRF = new RandomForest();
+			fcSRF.setClassifier(rfSRF);
 			
 			SMOTE smote = new SMOTE();
-			smote.setInputFormat(training);
-			fc.setFilter(smote);
+			smote.setInputFormat(trainingSRF);
+			fcSRF.setFilter(smote);
 			
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing); //sampled
-			return eval2;
+			fcSRF.buildClassifier(trainingSRF);
+			Evaluation evaSFR = new Evaluation(testingSFR);	
+			evaSFR.evaluateModel(fcSRF, testingSFR);
+			return evaSFR;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Evaluation smoteSamplingNaiveBayes(Instances training,Instances testing){
+	public static Evaluation smoteSamplingNaiveBayes(Instances trainingSNB,Instances testingSNB){
 		try {	
-			FilteredClassifier fc = new FilteredClassifier();
+			FilteredClassifier fcSNB = new FilteredClassifier();
 			NaiveBayes naiveB = new NaiveBayes();
-			fc.setClassifier(naiveB);
+			fcSNB.setClassifier(naiveB);
 			
 			SMOTE smote = new SMOTE();
-			smote.setInputFormat(training);
-			fc.setFilter(smote);
+			smote.setInputFormat(trainingSNB);
+			fcSNB.setFilter(smote);
 			
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing); //sampled
-			return eval2;
+			fcSNB.buildClassifier(trainingSNB);
+			Evaluation evalSNB = new Evaluation(testingSNB);	
+			evalSNB.evaluateModel(fcSNB, testingSNB);
+			return evalSNB;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Evaluation smoteSamplingIBk(Instances training,Instances testing){
+	public static Evaluation smoteSamplingIBk(Instances trainingSIBK,Instances testingSIBK){
 		try {
-			FilteredClassifier fc = new FilteredClassifier();
+			FilteredClassifier fcSIBK = new FilteredClassifier();
 			IBk ibk = new IBk();
-			fc.setClassifier(ibk);
+			fcSIBK.setClassifier(ibk);
 			
 			SMOTE smote = new SMOTE();
-			smote.setInputFormat(training);
-			fc.setFilter(smote);
+			smote.setInputFormat(trainingSIBK);
+			fcSIBK.setFilter(smote);
 			
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing); //sampled
-			return eval2;
+			fcSIBK.buildClassifier(trainingSIBK);
+			Evaluation evaSIBK = new Evaluation(testingSIBK);	
+			evaSIBK.evaluateModel(fcSIBK, testingSIBK);
+			return evaSIBK;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Evaluation underSamplingRandomForest(Instances training,Instances testing){
+	public static Evaluation underSamplingRandomForest(Instances trainingURF,Instances testingURF){
 		try {	
-			FilteredClassifier fc = new FilteredClassifier();
-			RandomForest rf = new RandomForest();
-			fc.setClassifier(rf);
+			FilteredClassifier fcURF = new FilteredClassifier();
+			RandomForest rfURF = new RandomForest();
+			fcURF.setClassifier(rfURF);
 			
 			SpreadSubsample  spreadSubsample = new SpreadSubsample();
 			String[] opts = new String[]{ "-M", "1.0"};
 			spreadSubsample.setOptions(opts);
-			fc.setFilter(spreadSubsample);
+			fcURF.setFilter(spreadSubsample);
 			
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing); //sampled
-			return eval2;
+			fcURF.buildClassifier(trainingURF);
+			Evaluation evaURF = new Evaluation(testingURF);	
+			evaURF.evaluateModel(fcURF, testingURF);
+			return evaURF;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Evaluation underSamplingNaiveBayes(Instances training,Instances testing){
+	public static Evaluation underSamplingNaiveBayes(Instances trainingUNB,Instances testingUNB){
 		try {	
-			FilteredClassifier fc = new FilteredClassifier();
-			NaiveBayes nb = new NaiveBayes();
-			fc.setClassifier(nb);
+			FilteredClassifier fcUNB = new FilteredClassifier();
+			NaiveBayes nbUNB = new NaiveBayes();
+			fcUNB.setClassifier(nbUNB);
 			
 			SpreadSubsample  spreadSubsample = new SpreadSubsample();
 			String[] opts = new String[]{ "-M", "1.0"};
 			spreadSubsample.setOptions(opts);
-			fc.setFilter(spreadSubsample);
+			fcUNB.setFilter(spreadSubsample);
 			
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing); //sampled
-			return eval2;
+			fcUNB.buildClassifier(trainingUNB);
+			Evaluation evaUNB = new Evaluation(testingUNB);	
+			evaUNB.evaluateModel(fcUNB, testingUNB);
+			return evaUNB;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static Evaluation underSamplingIBk(Instances training,Instances testing){
+	public static Evaluation underSamplingIBk(Instances trainingUIBK,Instances testingUIBK){
 		try {	
-			FilteredClassifier fc = new FilteredClassifier();
-			IBk ibk = new IBk();
-			fc.setClassifier(ibk);
+			FilteredClassifier fcUIBK = new FilteredClassifier();
+			IBk ibkU = new IBk();
+			fcUIBK.setClassifier(ibkU);
 			
 			SpreadSubsample  spreadSubsample = new SpreadSubsample();
 			String[] opts = new String[]{ "-M", "1.0"};
 			spreadSubsample.setOptions(opts);
-			fc.setFilter(spreadSubsample);
+			fcUIBK.setFilter(spreadSubsample);
 			
-			fc.buildClassifier(training);
-			Evaluation eval2 = new Evaluation(testing);	
-			eval2.evaluateModel(fc, testing); //sampled
-			return eval2;
+			fcUIBK.buildClassifier(trainingUIBK);
+			Evaluation evalUIBK = new Evaluation(testingUIBK);	
+			evalUIBK.evaluateModel(fcUIBK, testingUIBK);
+			return evalUIBK;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -376,25 +376,40 @@ public class TestWekaSampling {
 			rf.buildClassifier(training);
 			Evaluation eval = new Evaluation(testing);	
 			eval.evaluateModel(rf, testing);
-			writefile(filewriter,eval,NS,RANDOMFOREST);
-			writefile(filewriter,underSamplingRandomForest(training,testing),UNS,RANDOMFOREST);
-			writefile(filewriter,overSamplingRandomForest(training,testing),OVS,RANDOMFOREST);
-			writefile(filewriter,smoteSamplingRandomForest(training,testing),SMOTE,RANDOMFOREST);
+			Evaluation urf = underSamplingRandomForest(training,testing);
+			Evaluation orf = overSamplingRandomForest(training,testing);
+			Evaluation srf = smoteSamplingRandomForest(training,testing);
+			if(urf !=null && orf !=null && srf !=null) {
+				writefile(filewriter,eval,NS,RANDOMFOREST);
+				writefile(filewriter,urf,UNS,RANDOMFOREST);
+				writefile(filewriter,orf,OVS,RANDOMFOREST);
+				writefile(filewriter,srf,SMOTE,RANDOMFOREST);
+			}
 			NaiveBayes naiveB = new NaiveBayes();
 			naiveB.buildClassifier(training);
 			Evaluation eval1 = new Evaluation(testing);	
 			eval1.evaluateModel(naiveB, testing);
-			writefile(filewriter,eval1,NS,NAIVEBAYES);
-			writefile(filewriter,underSamplingNaiveBayes(training,testing),UNS,NAIVEBAYES);
-			writefile(filewriter,overSamplingNaiveBayes(training,testing),OVS,NAIVEBAYES);
-			writefile(filewriter,smoteSamplingNaiveBayes(training,testing),SMOTE,NAIVEBAYES);
+			Evaluation unb = underSamplingNaiveBayes(training,testing);
+			Evaluation onb = overSamplingNaiveBayes(training,testing);
+			Evaluation snb = smoteSamplingNaiveBayes(training,testing);
+			if(unb !=null && onb !=null && snb !=null) {
+				writefile(filewriter,eval1,NS,NAIVEBAYES);
+				writefile(filewriter,unb,UNS,NAIVEBAYES);
+				writefile(filewriter,onb,OVS,NAIVEBAYES);
+				writefile(filewriter,snb,SMOTE,NAIVEBAYES);
+			}
 			IBk ibk = new IBk();
 			ibk.buildClassifier(training);
 			Evaluation eval2 = new Evaluation(testing);
-			writefile(filewriter,eval2,NS,IBK);
-			writefile(filewriter,underSamplingIBk(training,testing),UNS,IBK);
-			writefile(filewriter,overSamplingIBk(training,testing),OVS,IBK);
-			writefile(filewriter,smoteSamplingIBk(training,testing),SMOTE,IBK);	
+			Evaluation uib = underSamplingIBk(training,testing);
+			Evaluation oib = overSamplingIBk(training,testing);
+			Evaluation sib = smoteSamplingIBk(training,testing);
+			if( uib != null && oib != null && sib !=null) {
+				writefile(filewriter,eval2,NS,IBK);
+				writefile(filewriter,uib,UNS,IBK);
+				writefile(filewriter,oib,OVS,IBK);
+				writefile(filewriter,sib,SMOTE,IBK);	
+			}
 		}			
 	}
 }
