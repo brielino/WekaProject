@@ -340,7 +340,7 @@ public class TestWekaSampling {
 	    saver2.writeBatch();
 	}
 	
-	public static void writefile(FileWriter filewriter,Evaluation eval,String sampling,String classifier) throws Exception {
+	public static void writefile(FileWriter filewriter,Evaluation eval,String sampling,String classifier) throws IOException {
 		/* Scrive il FileWriter con le informazioni passate come parametri */
 		filewriter.append(PROJECTNAME);
 		filewriter.append(",");
