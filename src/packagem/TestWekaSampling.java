@@ -1,6 +1,7 @@
 package packagem;
 
 import weka.core.Instances;
+import weka.core.WekaException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -122,10 +123,12 @@ public class TestWekaSampling {
 	/* Insieme di metodi che implementano le diverse tipologie di Sampling (SMOTE,OverSampling,UnderSampling) 
 	 * applicati a i diversi classificatori 
 	 */
-	public static Evaluation overSamplingRandomForest(Instances training,Instances testing) throws Throwable {
+	public static Evaluation overSamplingRandomForest(Instances training,Instances testing){
 		try{
 			Resample resample = new Resample();
+			
 			resample.setInputFormat(training);
+			
 			resample.setNoReplacement(false);
 			resample.setSampleSizePercent(2*takeYforOverSampling());
 			resample.setOptions(OPTS);
@@ -140,12 +143,13 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing);
 			return eval2;
-		}finally {
-			//
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static Evaluation overSamplingNaiveBayes(Instances training,Instances testing) throws Throwable {
+	public static Evaluation overSamplingNaiveBayes(Instances training,Instances testing){
 		try{
 			Resample resample = new Resample();
 			resample.setInputFormat(training);
@@ -163,12 +167,14 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing);
 			return eval2;
-		}finally {
-			doNothing();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static Evaluation overSamplingIBk(Instances training,Instances testing) throws Throwable {
+	public static Evaluation overSamplingIBk(Instances training,Instances testing){
 			
 		try{
 			Resample resample = new Resample();
@@ -187,12 +193,14 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing);
 			return eval2;
-		}finally {
-			doNothing();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static Evaluation smoteSamplingRandomForest(Instances training,Instances testing) throws Throwable {
+	public static Evaluation smoteSamplingRandomForest(Instances training,Instances testing){
 			
 		try {
 			FilteredClassifier fc = new FilteredClassifier();
@@ -207,12 +215,14 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
-		}finally {
-			doNothing();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static Evaluation smoteSamplingNaiveBayes(Instances training,Instances testing) throws Throwable {
+	public static Evaluation smoteSamplingNaiveBayes(Instances training,Instances testing){
 		try {	
 			FilteredClassifier fc = new FilteredClassifier();
 			NaiveBayes naiveB = new NaiveBayes();
@@ -226,12 +236,14 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
-		}finally {
-			doNothing();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static Evaluation smoteSamplingIBk(Instances training,Instances testing) throws Throwable {
+	public static Evaluation smoteSamplingIBk(Instances training,Instances testing){
 		try {
 			FilteredClassifier fc = new FilteredClassifier();
 			IBk ibk = new IBk();
@@ -245,12 +257,14 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
-		}finally {
-			doNothing();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static Evaluation underSamplingRandomForest(Instances training,Instances testing) throws Throwable {
+	public static Evaluation underSamplingRandomForest(Instances training,Instances testing){
 		try {	
 			FilteredClassifier fc = new FilteredClassifier();
 			RandomForest rf = new RandomForest();
@@ -265,12 +279,14 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
-		}finally {
-			doNothing();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static Evaluation underSamplingNaiveBayes(Instances training,Instances testing) throws Throwable {
+	public static Evaluation underSamplingNaiveBayes(Instances training,Instances testing){
 		try {	
 			FilteredClassifier fc = new FilteredClassifier();
 			NaiveBayes nb = new NaiveBayes();
@@ -285,12 +301,14 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
-		}finally {
-			doNothing();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	public static Evaluation underSamplingIBk(Instances training,Instances testing) throws Throwable {
+	public static Evaluation underSamplingIBk(Instances training,Instances testing){
 		try {	
 			FilteredClassifier fc = new FilteredClassifier();
 			IBk ibk = new IBk();
@@ -305,9 +323,11 @@ public class TestWekaSampling {
 			Evaluation eval2 = new Evaluation(testing);	
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
-		}finally {
-			doNothing();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	public static void createFileArff() throws IOException {
@@ -350,6 +370,8 @@ public class TestWekaSampling {
 	}
 	
 	public static void main(String[] args) throws Throwable{
+		createFileCsvTraining(foundPartition());
+		createFileArff();
 		DataSource source1 = new DataSource(PATH1+PATH0+PROJECTNAME+"TrainingSmote.arff");
 		Instances training = source1.getDataSet();
 		DataSource source2 = new DataSource(PATH1+PATH0+PROJECTNAME+"TestingSmote.arff");
