@@ -168,7 +168,6 @@ public class TestWekaSampling {
 			eval2.evaluateModel(fc, testing);
 			return eval2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -194,7 +193,6 @@ public class TestWekaSampling {
 			eval2.evaluateModel(fc, testing);
 			return eval2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -216,7 +214,6 @@ public class TestWekaSampling {
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -237,7 +234,6 @@ public class TestWekaSampling {
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -258,7 +254,6 @@ public class TestWekaSampling {
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -280,7 +275,6 @@ public class TestWekaSampling {
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -302,7 +296,6 @@ public class TestWekaSampling {
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -324,7 +317,6 @@ public class TestWekaSampling {
 			eval2.evaluateModel(fc, testing); //sampled
 			return eval2;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
