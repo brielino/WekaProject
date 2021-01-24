@@ -1,7 +1,6 @@
 package packagem;
 
 import weka.core.Instances;
-import weka.core.WekaException;
 
 import java.io.BufferedReader;
 import java.io.File;
