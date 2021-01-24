@@ -58,7 +58,7 @@ public class TestWekaSampling {
 	}
 	
 	public static void doNothing() {
-		// Questo metodo è stato introdotto per fare nulla
+		// Questo metodo Ã¨ stato introdotto per fare nulla
 	}
 	
 	public static void createFileCsvTraining(int numberSplit) throws IOException {
@@ -122,7 +122,7 @@ public class TestWekaSampling {
 	/* Insieme di metodi che implementano le diverse tipologie di Sampling (SMOTE,OverSampling,UnderSampling) 
 	 * applicati a i diversi classificatori 
 	 */
-	public static Evaluation overSamplingRandomForest(Instances training,Instances testing) throws Exception {
+	public static Evaluation overSamplingRandomForest(Instances training,Instances testing) throws Throwable {
 		try{
 			Resample resample = new Resample();
 			resample.setInputFormat(training);
@@ -145,7 +145,7 @@ public class TestWekaSampling {
 		}
 	}
 	
-	public static Evaluation overSamplingNaiveBayes(Instances training,Instances testing) throws Exception {
+	public static Evaluation overSamplingNaiveBayes(Instances training,Instances testing) throws Throwable {
 		try{
 			Resample resample = new Resample();
 			resample.setInputFormat(training);
@@ -168,7 +168,7 @@ public class TestWekaSampling {
 		}
 	}
 	
-	public static Evaluation overSamplingIBk(Instances training,Instances testing) throws Exception {
+	public static Evaluation overSamplingIBk(Instances training,Instances testing) throws Throwable {
 			
 		try{
 			Resample resample = new Resample();
@@ -192,7 +192,7 @@ public class TestWekaSampling {
 		}
 	}
 	
-	public static Evaluation smoteSamplingRandomForest(Instances training,Instances testing) throws Exception {
+	public static Evaluation smoteSamplingRandomForest(Instances training,Instances testing) throws Throwable {
 			
 		try {
 			FilteredClassifier fc = new FilteredClassifier();
@@ -212,7 +212,7 @@ public class TestWekaSampling {
 		}
 	}
 	
-	public static Evaluation smoteSamplingNaiveBayes(Instances training,Instances testing) throws Exception {
+	public static Evaluation smoteSamplingNaiveBayes(Instances training,Instances testing) throws Throwable {
 		try {	
 			FilteredClassifier fc = new FilteredClassifier();
 			NaiveBayes naiveB = new NaiveBayes();
@@ -231,7 +231,7 @@ public class TestWekaSampling {
 		}
 	}
 	
-	public static Evaluation smoteSamplingIBk(Instances training,Instances testing) throws Exception {
+	public static Evaluation smoteSamplingIBk(Instances training,Instances testing) throws Throwable {
 		try {
 			FilteredClassifier fc = new FilteredClassifier();
 			IBk ibk = new IBk();
@@ -250,7 +250,7 @@ public class TestWekaSampling {
 		}
 	}
 	
-	public static Evaluation underSamplingRandomForest(Instances training,Instances testing) throws Exception {
+	public static Evaluation underSamplingRandomForest(Instances training,Instances testing) throws Throwable {
 		try {	
 			FilteredClassifier fc = new FilteredClassifier();
 			RandomForest rf = new RandomForest();
@@ -270,7 +270,7 @@ public class TestWekaSampling {
 		}
 	}
 	
-	public static Evaluation underSamplingNaiveBayes(Instances training,Instances testing) throws Exception {
+	public static Evaluation underSamplingNaiveBayes(Instances training,Instances testing) throws Throwable {
 		try {	
 			FilteredClassifier fc = new FilteredClassifier();
 			NaiveBayes nb = new NaiveBayes();
@@ -290,7 +290,7 @@ public class TestWekaSampling {
 		}
 	}
 	
-	public static Evaluation underSamplingIBk(Instances training,Instances testing) throws Exception {
+	public static Evaluation underSamplingIBk(Instances training,Instances testing) throws Throwable {
 		try {	
 			FilteredClassifier fc = new FilteredClassifier();
 			IBk ibk = new IBk();
@@ -349,7 +349,7 @@ public class TestWekaSampling {
 		filewriter.append("\n");		
 	}
 	
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Throwable{
 		DataSource source1 = new DataSource(PATH1+PATH0+PROJECTNAME+"TrainingSmote.arff");
 		Instances training = source1.getDataSet();
 		DataSource source2 = new DataSource(PATH1+PATH0+PROJECTNAME+"TestingSmote.arff");
